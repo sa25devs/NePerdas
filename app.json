@@ -1,0 +1,103 @@
+{
+  "expo": {
+    "name": "SimplyFresh",
+    "slug": "SimplyFresh",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "simplyfresh",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.simplyfresh.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "SimplyFresh uses the camera to scan food package labels and expiry dates.",
+        "NSPhotoLibraryUsageDescription": "SimplyFresh needs photo library access to scan food package photos.",
+        "NSCalendarsUsageDescription": "SimplyFresh can add expiry reminders to your calendar.",
+        "NSCalendarsFullAccessUsageDescription": "SimplyFresh can add expiry reminders to your calendar.",
+        "NSRemindersUsageDescription": "SimplyFresh can create reminders for food expiry dates."
+      }
+    },
+    "android": {
+      "package": "com.simplyfresh.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#E8F5E9",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "backgroundImage": "./assets/images/android-icon-background.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.VIBRATE",
+        "android.permission.SCHEDULE_EXACT_ALARM"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-dev-client",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "SimplyFresh uses the camera to scan food package labels and expiry dates."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "SimplyFresh needs photo library access to scan food package photos."
+        }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "SimplyFresh can add expiry reminders to your calendar."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#2E7D32"
+        }
+      ],
+      [
+        "expo-mlkit-ocr",
+        {
+          "iosEngine": "auto"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "16.4"
+          }
+        }
+      ],
+      "@react-native-community/datetimepicker"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
