@@ -3,7 +3,7 @@ import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
-} from '@react-navigation/native';
+} from 'expo-router/react-navigation';
 import { Stack, router } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -71,6 +71,10 @@ function RootLayoutNav() {
           options={{ title: 'Review item', presentation: 'modal' }}
         />
         <Stack.Screen name="item/[id]" options={{ title: 'Item' }} />
+        <Stack.Screen
+          name="scan"
+          options={{ title: 'Scan', presentation: 'modal' }}
+        />
         <Stack.Screen
           name="manual-add"
           options={{ title: 'Add manually', presentation: 'modal' }}

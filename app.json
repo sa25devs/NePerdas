@@ -1,27 +1,29 @@
 {
   "expo": {
-    "name": "SimplyFresh",
-    "slug": "SimplyFresh",
+    "name": "NePerdas",
+    "slug": "neperdas",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "simplyfresh",
+    "scheme": "neperdas",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.simplyfresh.app",
+      "bundleIdentifier": "com.neperdas.app",
       "infoPlist": {
-        "NSCameraUsageDescription": "SimplyFresh uses the camera to scan food package labels and expiry dates.",
-        "NSPhotoLibraryUsageDescription": "SimplyFresh needs photo library access to scan food package photos.",
-        "NSCalendarsUsageDescription": "SimplyFresh can add expiry reminders to your calendar.",
-        "NSCalendarsFullAccessUsageDescription": "SimplyFresh can add expiry reminders to your calendar.",
-        "NSRemindersUsageDescription": "SimplyFresh can create reminders for food expiry dates."
+        "CFBundleDisplayName": "NePerdas",
+        "NSCameraUsageDescription": "NePerdas uses the camera to scan food package labels and expiry dates.",
+        "NSPhotoLibraryUsageDescription": "NePerdas needs photo library access to scan food package photos.",
+        "NSCalendarsUsageDescription": "NePerdas can add expiry reminders to your calendar.",
+        "NSCalendarsFullAccessUsageDescription": "NePerdas can add expiry reminders to your calendar.",
+        "NSRemindersUsageDescription": "NePerdas can create reminders for food expiry dates.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
-      "package": "com.simplyfresh.app",
+      "package": "com.neperdas.app",
       "adaptiveIcon": {
-        "backgroundColor": "#E8F5E9",
+        "backgroundColor": "#2E7D32",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
@@ -36,12 +38,13 @@
         "android.permission.WRITE_CALENDAR",
         "android.permission.RECEIVE_BOOT_COMPLETED",
         "android.permission.VIBRATE",
-        "android.permission.SCHEDULE_EXACT_ALARM"
+        "android.permission.SCHEDULE_EXACT_ALARM",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -50,27 +53,31 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/icon.png",
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#ffffff",
+          "imageWidth": 200,
+          "ios": {
+            "imageWidth": 300
+          }
         }
       ],
       [
         "expo-camera",
         {
-          "cameraPermission": "SimplyFresh uses the camera to scan food package labels and expiry dates."
+          "cameraPermission": "NePerdas uses the camera to scan food package labels and expiry dates."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "SimplyFresh needs photo library access to scan food package photos."
+          "photosPermission": "NePerdas needs photo library access to scan food package photos."
         }
       ],
       [
         "expo-calendar",
         {
-          "calendarPermission": "SimplyFresh can add expiry reminders to your calendar."
+          "calendarPermission": "NePerdas can add expiry reminders to your calendar."
         }
       ],
       [
@@ -98,6 +105,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "35f21816-2900-489c-bf45-c4d8bff03084"
+      }
+    },
+    "owner": "sa25.devs"
   }
 }

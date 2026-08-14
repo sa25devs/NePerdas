@@ -46,6 +46,11 @@ export function daysUntil(expirationISO: string): number {
   return Math.round(ms / (1000 * 60 * 60 * 24));
 }
 
+/** True when the expiration date is before today. */
+export function isExpired(expirationISO: string): boolean {
+  return daysUntil(expirationISO) < 0;
+}
+
 /** Combine reminder date + hour/minute into a Date for scheduling. */
 export function reminderDateTime(
   reminderISO: string,

@@ -1,10 +1,10 @@
 /**
  * Parse raw OCR text into a likely product name and expiration date.
- * Supports MHD / EXP / Best before / Use by / Caducidad and common date formats.
+ * Supports MHD / EXP / Best before / Use by / Caducidad / Caducitat / Validade / Λήξη / تاريخ الانتهاء / Data ważności / Годен до and common date formats.
  */
 
 const EXPIRY_KEYWORDS =
-  /(?:best\s*before|use\s*by|exp(?:iry|ires|iration)?\.?|mhd|bbd|caducidad|consumir\s*(?:preferentemente\s*)?(?:antes(?:\s*de)?|preferente)|vence|vencimiento|à\s*consommer\s*(?:de\s*)?préférence|mindesthaltbar(?:keitsdatum)?|verbrauchen\s*bis)/i;
+  /(?:best\s*before|use\s*by|exp(?:iry|ires|iration)?\.?|mhd|bbd|caducidad|caducitat|consumir\s*(?:preferentemente\s*|preferentment\s*)?(?:antes(?:\s*de)?|preferente)|vence|vencimiento|validade|data\s*de\s*validade|consumir\s*(?:de\s*)?prefer[eê]ncia|à\s*consommer\s*(?:de\s*)?préférence|mindesthaltbar(?:keitsdatum)?|verbrauchen\s*bis|λήξη|ημερομηνία\s*λήξης|ανάλωση|تاريخ\s*الانتهاء|صالح\s*حتى|يفضل\s*الاستهلاك|الصلاحية|data\s*ważności|termin\s*ważności|spożyć\s*do|najlepiej\s*spożyć|przydatn(?:ość|y)|годен\s*до|срок\s*годности|употребить\s*до)/i;
 
 const DATE_PATTERNS: RegExp[] = [
   // YYYY-MM-DD

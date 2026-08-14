@@ -1,4 +1,4 @@
-# SimplyFresh
+# NePerdas
 
 Track food expiry dates by scanning package labels on iOS and Android.
 

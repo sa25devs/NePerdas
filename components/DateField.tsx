@@ -10,7 +10,8 @@ import {
   View,
 } from 'react-native';
 
-import { formatDisplayDate, formatISODate, parseISODate } from '@/src/utils/dates';
+import { useI18n } from '@/src/i18n/useI18n';
+import { formatISODate, parseISODate } from '@/src/utils/dates';
 
 type Props = {
   label: string;
@@ -30,6 +31,7 @@ export function DateField({
   mutedColor,
 }: Props) {
   const [open, setOpen] = useState(false);
+  const { t, formatDate, locale } = useI18n();
   const value = parseISODate(valueISO);
 
   function onPickerChange(event: DateTimePickerEvent, date?: Date) {
@@ -49,14 +51,16 @@ export function DateField({
         onPress={() => setOpen(true)}
         style={[styles.field, { borderColor }]}>
         <Text style={{ color: textColor, fontSize: 16 }}>
-          {formatDisplayDate(valueISO)}
+          {formatDate(valueISO)}
         </Text>
       </Pressable>
       {open ? (
         <>
           {Platform.OS === 'ios' ? (
             <Pressable onPress={() => setOpen(false)} style={styles.done}>
-              <Text style={{ color: textColor, fontWeight: '600' }}>Done</Text>
+              <Text style={{ color: textColor, fontWeight: '600' }}>
+                {t('done')}
+              </Text>
             </Pressable>
           ) : null}
           <DateTimePicker
@@ -64,6 +68,7 @@ export function DateField({
             mode="date"
             display={Platform.OS === 'ios' ? 'spinner' : 'default'}
             onChange={onPickerChange}
+            locale={locale}
           />
         </>
       ) : null}

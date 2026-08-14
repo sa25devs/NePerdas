@@ -1,20 +1,40 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { FoodItem } from '@/src/models/types';
+import { migratePhotoRef } from '@/src/storage/photos';
 
-const ITEMS_KEY = 'simplyfresh:foodItems';
+const ITEMS_KEY = 'neperdas:foodItems';
 
 export async function loadFoodItems(): Promise<FoodItem[]> {
   try {
     const raw = await AsyncStorage.getItem(ITEMS_KEY);
     if (!raw) return [];
     const items = JSON.parse(raw) as FoodItem[];
-    return items.sort((a, b) =>
+    const migrated = await migrateItemPhotos(items);
+    return migrated.sort((a, b) =>
       a.expirationDate.localeCompare(b.expirationDate),
     );
   } catch {
     return [];
   }
+}
+
+async function migrateItemPhotos(items: FoodItem[]): Promise<FoodItem[]> {
+  let changed = false;
+  const next: FoodItem[] = [];
+  for (const item of items) {
+    const photoUri = await migratePhotoRef(item.photoUri, item.id);
+    if (photoUri !== item.photoUri) {
+      changed = true;
+      next.push({ ...item, photoUri });
+    } else {
+      next.push(item);
+    }
+  }
+  if (changed) {
+    await persist(next);
+  }
+  return next;
 }
 
 async function persist(items: FoodItem[]): Promise<void> {

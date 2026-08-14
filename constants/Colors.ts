@@ -12,6 +12,7 @@ export default {
     border: '#DDE7DD',
     muted: '#5F6B5F',
     danger: '#C62828',
+    dangerSoft: '#FDECEA',
     warning: '#EF6C00',
   },
   dark: {
@@ -24,6 +25,7 @@ export default {
     border: '#2A332A',
     muted: '#A8B2A8',
     danger: '#EF9A9A',
+    dangerSoft: '#3A1A1A',
     warning: '#FFB74D',
   },
 };

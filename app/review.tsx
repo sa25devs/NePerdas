@@ -1,5 +1,5 @@
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { useMemo, useState } from 'react';
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -14,14 +14,18 @@ import {
 } from 'react-native';
 
 import { DateField } from '@/components/DateField';
+import { FoodTypeField } from '@/components/FoodTypeField';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useAppData } from '@/src/context/AppContext';
+import { useI18n } from '@/src/i18n/useI18n';
 import { saveFoodEntry } from '@/src/services/foodService';
+import { todayISO } from '@/src/utils/dates';
 import {
-  computeReminderDate,
-  todayISO,
-} from '@/src/utils/dates';
+  inferFoodType,
+  reminderDateForFoodType,
+  type FoodType,
+} from '@/src/utils/foodType';
 
 function firstParam(v: string | string[] | undefined): string {
   if (Array.isArray(v)) return v[0] ?? '';
@@ -38,31 +42,69 @@ export default function ReviewScreen() {
   const colorScheme = useColorScheme() ?? 'light';
   const colors = Colors[colorScheme];
   const { settings, refreshItems } = useAppData();
+  const { t } = useI18n();
   const router = useRouter();
+  const navigation = useNavigation();
 
   const photoUri = firstParam(params.photoUri) || null;
+  const initialName = firstParam(params.name);
   const initialExpiry = firstParam(params.expirationDate) || todayISO();
+  const rawText = useMemo(() => firstParam(params.rawText), [params.rawText]);
+  const initialType = inferFoodType(initialName, rawText);
 
-  const [name, setName] = useState(firstParam(params.name));
+  const [name, setName] = useState(initialName);
+  const [foodType, setFoodType] = useState<FoodType>(initialType);
+  const [typeLocked, setTypeLocked] = useState(false);
   const [expirationDate, setExpirationDate] = useState(initialExpiry);
   const [reminderDate, setReminderDate] = useState(
-    computeReminderDate(initialExpiry, settings.daysBeforeExpiry),
+    reminderDateForFoodType(initialExpiry, initialType, settings.daysBeforeExpiryByFoodType),
   );
   const [addToCalendar, setAddToCalendar] = useState(
     settings.addToCalendarByDefault,
   );
   const [saving, setSaving] = useState(false);
 
-  const rawText = useMemo(() => firstParam(params.rawText), [params.rawText]);
+  useEffect(() => {
+    navigation.setOptions({ title: t('reviewTitle') });
+  }, [navigation, t]);
+
+  function applyFoodType(next: FoodType, expiry = expirationDate) {
+    setFoodType(next);
+    setReminderDate(
+      reminderDateForFoodType(
+        expiry,
+        next,
+        settings.daysBeforeExpiryByFoodType,
+      ),
+    );
+  }
+
+  function onNameChange(value: string) {
+    setName(value);
+    if (!typeLocked) {
+      applyFoodType(inferFoodType(value, rawText));
+    }
+  }
+
+  function onFoodTypeChange(next: FoodType) {
+    setTypeLocked(true);
+    applyFoodType(next);
+  }
 
   function onExpiryChange(iso: string) {
     setExpirationDate(iso);
-    setReminderDate(computeReminderDate(iso, settings.daysBeforeExpiry));
+    setReminderDate(
+      reminderDateForFoodType(
+        iso,
+        foodType,
+        settings.daysBeforeExpiryByFoodType,
+      ),
+    );
   }
 
   async function onSave() {
     if (!name.trim()) {
-      Alert.alert('Name required', 'Enter a name for this food item.');
+      Alert.alert(t('nameRequired'), t('nameRequiredBody'));
       return;
     }
     setSaving(true);
@@ -81,7 +123,7 @@ export default function ReviewScreen() {
       router.replace('/(tabs)');
     } catch (e) {
       Alert.alert(
-        'Could not save',
+        t('couldNotSave'),
         e instanceof Error ? e.message : 'Unknown error',
       );
     } finally {
@@ -98,15 +140,15 @@ export default function ReviewScreen() {
         <Image source={{ uri: photoUri }} style={styles.photo} />
       ) : (
         <View style={[styles.photo, styles.photoPlaceholder]}>
-          <Text style={{ color: colors.muted }}>No photo</Text>
+          <Text style={{ color: colors.muted }}>{t('noPhoto')}</Text>
         </View>
       )}
 
-      <Text style={[styles.label, { color: colors.muted }]}>Name</Text>
+      <Text style={[styles.label, { color: colors.muted }]}>{t('name')}</Text>
       <TextInput
         value={name}
-        onChangeText={setName}
-        placeholder="e.g. Milk"
+        onChangeText={onNameChange}
+        placeholder={t('namePlaceholder')}
         placeholderTextColor={colors.muted}
         style={[
           styles.input,
@@ -114,8 +156,18 @@ export default function ReviewScreen() {
         ]}
       />
 
+      <FoodTypeField
+        value={foodType}
+        onChange={onFoodTypeChange}
+        textColor={colors.text}
+        borderColor={colors.border}
+        mutedColor={colors.muted}
+        tintColor={colors.tint}
+        backgroundColor={colors.background}
+      />
+
       <DateField
-        label="Expiration date"
+        label={t('expirationDate')}
         valueISO={expirationDate}
         onChange={onExpiryChange}
         textColor={colors.text}
@@ -124,7 +176,7 @@ export default function ReviewScreen() {
       />
 
       <DateField
-        label="Remind me on"
+        label={t('remindMeOn')}
         valueISO={reminderDate}
         onChange={setReminderDate}
         textColor={colors.text}
@@ -134,7 +186,7 @@ export default function ReviewScreen() {
 
       <View style={styles.switchRow}>
         <Text style={[styles.label, { color: colors.text, flex: 1 }]}>
-          Add calendar alarm
+          {t('addCalendarAlarm')}
         </Text>
         <Switch value={addToCalendar} onValueChange={setAddToCalendar} />
       </View>
@@ -146,13 +198,17 @@ export default function ReviewScreen() {
       ) : null}
 
       <Pressable
-        style={[styles.saveBtn, { backgroundColor: colors.tint }, saving && { opacity: 0.6 }]}
+        style={[
+          styles.saveBtn,
+          { backgroundColor: colors.tint },
+          saving && { opacity: 0.6 },
+        ]}
         onPress={onSave}
         disabled={saving}>
         {saving ? (
           <ActivityIndicator color="#fff" />
         ) : (
-          <Text style={styles.saveText}>Save reminder</Text>
+          <Text style={styles.saveText}>{t('saveReminder')}</Text>
         )}
       </Pressable>
     </ScrollView>

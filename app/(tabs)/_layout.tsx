@@ -4,10 +4,12 @@ import { Tabs } from 'expo-router';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { useI18n } from '@/src/i18n/useI18n';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme() ?? 'light';
   const colors = Colors[colorScheme];
+  const { t } = useI18n();
 
   return (
     <Tabs
@@ -18,25 +20,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Inventory',
+          title: t('tabInventory'),
           tabBarIcon: ({ color }) => (
             <SymbolView name="list.bullet" tintColor={color} size={26} />
           ),
         }}
       />
       <Tabs.Screen
-        name="scan"
-        options={{
-          title: 'Scan',
-          tabBarIcon: ({ color }) => (
-            <SymbolView name="camera.fill" tintColor={color} size={26} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="settings"
         options={{
-          title: 'Settings',
+          title: t('tabSettings'),
           tabBarIcon: ({ color }) => (
             <SymbolView name="gearshape.fill" tintColor={color} size={26} />
           ),

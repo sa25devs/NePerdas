@@ -17,23 +17,23 @@ import { DateField } from '@/components/DateField';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useAppData } from '@/src/context/AppContext';
+import { useI18n } from '@/src/i18n/useI18n';
 import type { FoodItem } from '@/src/models/types';
 import {
   removeFoodEntry,
   saveFoodEntry,
 } from '@/src/services/foodService';
 import { getFoodItem } from '@/src/storage/foodItems';
-import {
-  computeReminderDate,
-  daysUntil,
-  formatDisplayDate,
-} from '@/src/utils/dates';
+import { resolvePhotoUri } from '@/src/storage/photos';
+import { daysUntil } from '@/src/utils/dates';
+import { inferFoodType, reminderDateForFoodType } from '@/src/utils/foodType';
 
 export default function ItemDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const colorScheme = useColorScheme() ?? 'light';
   const colors = Colors[colorScheme];
   const { settings, refreshItems } = useAppData();
+  const { t, formatDate } = useI18n();
   const router = useRouter();
   const navigation = useNavigation();
 
@@ -65,24 +65,26 @@ export default function ItemDetailScreen() {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: item?.name ?? 'Item',
+      title: item?.name ?? t('itemTitle'),
       headerRight: () =>
         item ? (
-          <Pressable onPress={() => setEditing((e) => !e)} style={{ marginRight: 8 }}>
+          <Pressable
+            onPress={() => setEditing((e) => !e)}
+            style={{ marginRight: 8 }}>
             <Text style={{ color: colors.tint, fontWeight: '600' }}>
-              {editing ? 'Cancel' : 'Edit'}
+              {editing ? t('cancel') : t('edit')}
             </Text>
           </Pressable>
         ) : null,
     });
-  }, [navigation, item, editing, colors.tint]);
+  }, [navigation, item, editing, colors.tint, t]);
 
   async function onDelete() {
     if (!item) return;
-    Alert.alert('Delete item', `Remove “${item.name}”?`, [
-      { text: 'Cancel', style: 'cancel' },
+    Alert.alert(t('deleteItem'), t('deleteConfirm', { name: item.name }), [
+      { text: t('cancel'), style: 'cancel' },
       {
-        text: 'Delete',
+        text: t('delete'),
         style: 'destructive',
         onPress: async () => {
           await removeFoodEntry(item.id);
@@ -96,7 +98,7 @@ export default function ItemDetailScreen() {
   async function onSaveEdits() {
     if (!item) return;
     if (!name.trim()) {
-      Alert.alert('Name required', 'Enter a name for this food item.');
+      Alert.alert(t('nameRequired'), t('nameRequiredBody'));
       return;
     }
     setSaving(true);
@@ -114,7 +116,7 @@ export default function ItemDetailScreen() {
       await refreshItems();
     } catch (e) {
       Alert.alert(
-        'Could not save',
+        t('couldNotSave'),
         e instanceof Error ? e.message : 'Unknown error',
       );
     } finally {
@@ -124,7 +126,13 @@ export default function ItemDetailScreen() {
 
   function onExpiryChange(iso: string) {
     setExpirationDate(iso);
-    setReminderDate(computeReminderDate(iso, settings.daysBeforeExpiry));
+    setReminderDate(
+      reminderDateForFoodType(
+        iso,
+        inferFoodType(name),
+        settings.daysBeforeExpiryByFoodType,
+      ),
+    );
   }
 
   if (loading) {
@@ -138,7 +146,7 @@ export default function ItemDetailScreen() {
   if (!item) {
     return (
       <View style={[styles.center, { backgroundColor: colors.background }]}>
-        <Text style={{ color: colors.text }}>Item not found.</Text>
+        <Text style={{ color: colors.text }}>{t('itemNotFound')}</Text>
       </View>
     );
   }
@@ -151,12 +159,19 @@ export default function ItemDetailScreen() {
       contentContainerStyle={styles.content}
       keyboardShouldPersistTaps="handled">
       {item.photoUri ? (
-        <Image source={{ uri: item.photoUri }} style={styles.photo} />
+        <Image
+          source={{
+            uri: resolvePhotoUri(item.photoUri, item.id) ?? item.photoUri,
+          }}
+          style={styles.photo}
+        />
       ) : null}
 
       {editing ? (
         <>
-          <Text style={[styles.label, { color: colors.muted }]}>Name</Text>
+          <Text style={[styles.label, { color: colors.muted }]}>
+            {t('name')}
+          </Text>
           <TextInput
             value={name}
             onChangeText={setName}
@@ -166,7 +181,7 @@ export default function ItemDetailScreen() {
             ]}
           />
           <DateField
-            label="Expiration date"
+            label={t('expirationDate')}
             valueISO={expirationDate}
             onChange={onExpiryChange}
             textColor={colors.text}
@@ -174,7 +189,7 @@ export default function ItemDetailScreen() {
             mutedColor={colors.muted}
           />
           <DateField
-            label="Remind me on"
+            label={t('remindMeOn')}
             valueISO={reminderDate}
             onChange={setReminderDate}
             textColor={colors.text}
@@ -183,7 +198,7 @@ export default function ItemDetailScreen() {
           />
           <View style={styles.switchRow}>
             <Text style={[styles.label, { color: colors.text, flex: 1 }]}>
-              Calendar alarm
+              {t('calendarAlarm')}
             </Text>
             <Switch value={addToCalendar} onValueChange={setAddToCalendar} />
           </View>
@@ -198,18 +213,20 @@ export default function ItemDetailScreen() {
             {saving ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.btnText}>Save changes</Text>
+              <Text style={styles.btnText}>{t('saveChanges')}</Text>
             )}
           </Pressable>
         </>
       ) : (
         <>
-          <Text style={[styles.title, { color: colors.text }]}>{item.name}</Text>
+          <Text style={[styles.title, { color: colors.text }]}>
+            {item.name}
+          </Text>
           <Text style={{ color: colors.muted }}>
-            Added {formatDisplayDate(item.createdAt)}
+            {t('addedOn', { date: formatDate(item.createdAt) })}
           </Text>
           <Text style={[styles.meta, { color: colors.text }]}>
-            Expires {formatDisplayDate(item.expirationDate)}
+            {t('expiresOn', { date: formatDate(item.expirationDate) })}
           </Text>
           <Text
             style={{
@@ -222,17 +239,18 @@ export default function ItemDetailScreen() {
               fontWeight: '600',
             }}>
             {days < 0
-              ? `Expired ${Math.abs(days)} day(s) ago`
+              ? t('expiredDaysAgo', { days: Math.abs(days) })
               : days === 0
-                ? 'Expires today'
-                : `${days} day(s) left`}
+                ? t('expiresToday')
+                : t('daysLeftLong', { days })}
           </Text>
           <Text style={{ color: colors.muted }}>
-            Reminder on {formatDisplayDate(item.reminderDate)}
+            {t('reminderOn', { date: formatDate(item.reminderDate) })}
           </Text>
           <Text style={{ color: colors.muted }}>
-            Calendar alarm:{' '}
-            {item.calendarEventId ? 'Yes' : 'No'}
+            {t('calendarAlarmLabel', {
+              value: item.calendarEventId ? t('calendarYes') : t('calendarNo'),
+            })}
           </Text>
         </>
       )}
@@ -240,7 +258,7 @@ export default function ItemDetailScreen() {
       <Pressable
         style={[styles.btn, { backgroundColor: colors.danger, marginTop: 16 }]}
         onPress={onDelete}>
-        <Text style={styles.btnText}>Delete</Text>
+        <Text style={styles.btnText}>{t('delete')}</Text>
       </Pressable>
     </ScrollView>
   );

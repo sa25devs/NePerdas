@@ -11,6 +11,7 @@ import type { AppSettings, FoodItem } from '@/src/models/types';
 import { listFoodItems } from '@/src/services/foodService';
 import { loadSettings, saveSettings } from '@/src/storage/settings';
 import { DEFAULT_SETTINGS } from '@/src/models/types';
+import { syncLayoutDirection } from '@/src/i18n/rtl';
 
 type AppContextValue = {
   items: FoodItem[];
@@ -35,6 +36,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const updateSettings = useCallback(async (next: AppSettings) => {
     await saveSettings(next);
     setSettings(next);
+    await syncLayoutDirection(next.language);
   }, []);
 
   useEffect(() => {
@@ -43,6 +45,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setSettings(s);
       setItems(list);
       setLoading(false);
+      await syncLayoutDirection(s.language);
     })();
   }, []);
 
