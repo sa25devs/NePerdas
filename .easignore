@@ -1,0 +1,42 @@
+# Copy of .gitignore, plus native folders so EAS always runs prebuild.
+# If .easignore exists, EAS CLI uses it instead of .gitignore.
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# Always regenerate native projects on EAS (do not upload a local ios/android tree)
+/ios
+/android
