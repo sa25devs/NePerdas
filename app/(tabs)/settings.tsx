@@ -29,13 +29,9 @@ function clamp(n: number, min: number, max: number) {
 function daysStateFromSettings(
   daysByType: DaysBeforeExpiryByFoodType,
 ): Record<FoodType, string> {
-  return {
-    dairy: String(daysByType.dairy),
-    meat: String(daysByType.meat),
-    fish: String(daysByType.fish),
-    vegetables: String(daysByType.vegetables),
-    unknown: String(daysByType.unknown),
-  };
+  return Object.fromEntries(
+    FOOD_TYPES.map((type) => [type, String(daysByType[type])]),
+  ) as Record<FoodType, string>;
 }
 
 export default function SettingsScreen() {

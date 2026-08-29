@@ -112,21 +112,32 @@ export default function ScanScreen() {
   }
 
   if (!permission.granted) {
+    const canAsk = permission.canAskAgain;
     return (
       <View style={[styles.center, { backgroundColor: colors.background }]}>
         <Text style={[styles.message, { color: colors.text }]}>
-          {t('cameraNeeded')}
+          {canAsk ? t('cameraNeeded') : t('cameraDenied')}
         </Text>
-        <Pressable
-          style={[styles.btn, { backgroundColor: colors.tint }]}
-          onPress={requestPermission}>
-          <Text style={styles.btnText}>{t('allowCamera')}</Text>
-        </Pressable>
-        <Pressable style={styles.linkBtn} onPress={pickFromLibrary}>
-          <Text style={{ color: colors.tint, fontWeight: '600' }}>
-            {t('chooseLibrary')}
-          </Text>
-        </Pressable>
+        {canAsk ? (
+          <Pressable
+            style={[styles.btn, { backgroundColor: colors.tint }]}
+            onPress={requestPermission}>
+            <Text style={styles.btnText}>{t('allowCamera')}</Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            style={[styles.btn, { backgroundColor: colors.tint }]}
+            onPress={pickFromLibrary}>
+            <Text style={styles.btnText}>{t('chooseLibrary')}</Text>
+          </Pressable>
+        )}
+        {canAsk ? (
+          <Pressable style={styles.linkBtn} onPress={pickFromLibrary}>
+            <Text style={{ color: colors.tint, fontWeight: '600' }}>
+              {t('chooseLibrary')}
+            </Text>
+          </Pressable>
+        ) : null}
         <Pressable
           style={styles.linkBtn}
           onPress={() => router.replace('/manual-add')}>
