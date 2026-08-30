@@ -5,6 +5,8 @@ import { useNavigation, useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  AppState,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -32,13 +34,51 @@ export default function ScanScreen() {
   const router = useRouter();
   const navigation = useNavigation();
   const cameraRef = useRef<CameraView>(null);
-  const [permission, requestPermission] = useCameraPermissions();
+  const askingCameraRef = useRef(false);
+  const [permission, requestPermission, getPermission] = useCameraPermissions();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // After Don't Allow, never re-request camera or send the user to Settings.
+  const [deniedThisSession, setDeniedThisSession] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({ title: t('takePhoto') });
   }, [navigation, t]);
+
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (next) => {
+      if (next === 'active') {
+        void getPermission();
+      }
+    });
+    return () => sub.remove();
+  }, [getPermission]);
+
+  useEffect(() => {
+    if (permission?.granted) {
+      setDeniedThisSession(false);
+    }
+  }, [permission?.granted]);
+
+  const canShowSystemPrompt =
+    !deniedThisSession &&
+    permission != null &&
+    !permission.granted &&
+    (permission.status === 'undetermined' ||
+      (Platform.OS !== 'ios' && permission.canAskAgain));
+
+  async function onAllowCamera() {
+    if (!canShowSystemPrompt || askingCameraRef.current) return;
+    askingCameraRef.current = true;
+    try {
+      const result = await requestPermission();
+      if (!result.granted) {
+        setDeniedThisSession(true);
+      }
+    } finally {
+      askingCameraRef.current = false;
+    }
+  }
 
   async function processImage(uri: string) {
     setBusy(true);
@@ -112,16 +152,15 @@ export default function ScanScreen() {
   }
 
   if (!permission.granted) {
-    const canAsk = permission.canAskAgain;
     return (
       <View style={[styles.center, { backgroundColor: colors.background }]}>
         <Text style={[styles.message, { color: colors.text }]}>
-          {canAsk ? t('cameraNeeded') : t('cameraDenied')}
+          {canShowSystemPrompt ? t('cameraNeeded') : t('cameraDenied')}
         </Text>
-        {canAsk ? (
+        {canShowSystemPrompt ? (
           <Pressable
             style={[styles.btn, { backgroundColor: colors.tint }]}
-            onPress={requestPermission}>
+            onPress={onAllowCamera}>
             <Text style={styles.btnText}>{t('allowCamera')}</Text>
           </Pressable>
         ) : (
@@ -131,7 +170,7 @@ export default function ScanScreen() {
             <Text style={styles.btnText}>{t('chooseLibrary')}</Text>
           </Pressable>
         )}
-        {canAsk ? (
+        {canShowSystemPrompt ? (
           <Pressable style={styles.linkBtn} onPress={pickFromLibrary}>
             <Text style={{ color: colors.tint, fontWeight: '600' }}>
               {t('chooseLibrary')}
