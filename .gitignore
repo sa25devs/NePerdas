@@ -37,5 +37,9 @@ yarn-error.*
 *.tsbuildinfo
 
 # generated native folders
-/ios
+/ios/*
+!/ios/ci_scripts/
+!/ios/ci_scripts/**
+!/ios/NoWaste.xcworkspace/
+!/ios/NoWaste.xcworkspace/**
 /android
