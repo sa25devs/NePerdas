@@ -82,7 +82,7 @@ const en = {
   cameraNeeded: 'Camera access is needed to scan food labels.',
   cameraDenied:
     'Camera is turned off. You can still add an item from your photo library or enter it manually.',
-  allowCamera: 'Allow camera',
+  continue: 'Continue',
   chooseLibrary: 'Choose from library instead',
   readingLabel: 'Reading label…',
   library: 'Library',
@@ -178,7 +178,7 @@ const es: Record<TranslationKey, string> = {
   cameraNeeded: 'Se necesita acceso a la cámara para escanear etiquetas.',
   cameraDenied:
     'La cámara está desactivada. Aún puedes añadir un producto desde la galería o escribirlo a mano.',
-  allowCamera: 'Permitir cámara',
+  continue: 'Continuar',
   chooseLibrary: 'Elegir de la galería',
   readingLabel: 'Leyendo etiqueta…',
   library: 'Galería',
@@ -271,7 +271,7 @@ const ca: Record<TranslationKey, string> = {
   cameraNeeded: 'Cal accés a la càmera per escanejar etiquetes.',
   cameraDenied:
     'La càmera està desactivada. Encara pots afegir un producte des de la galeria o escriure’l a mà.',
-  allowCamera: 'Permetre la càmera',
+  continue: 'Continua',
   chooseLibrary: 'Triar de la galeria',
   readingLabel: 'Llegint l’etiqueta…',
   library: 'Galeria',
@@ -364,7 +364,7 @@ const pt: Record<TranslationKey, string> = {
   cameraNeeded: 'É necessário acesso à câmara para digitalizar etiquetas.',
   cameraDenied:
     'A câmara está desativada. Ainda podes adicionar um item a partir da galeria ou introduzi-lo manualmente.',
-  allowCamera: 'Permitir câmara',
+  continue: 'Continuar',
   chooseLibrary: 'Escolher da galeria',
   readingLabel: 'A ler etiqueta…',
   library: 'Galeria',
@@ -457,7 +457,7 @@ const de: Record<TranslationKey, string> = {
   cameraNeeded: 'Kamerazugriff wird benötigt, um Etiketten zu scannen.',
   cameraDenied:
     'Die Kamera ist ausgeschaltet. Du kannst weiterhin ein Produkt aus der Mediathek hinzufügen oder es manuell eingeben.',
-  allowCamera: 'Kamera erlauben',
+  continue: 'Weiter',
   chooseLibrary: 'Aus Mediathek wählen',
   readingLabel: 'Etikett wird gelesen…',
   library: 'Mediathek',
@@ -550,7 +550,7 @@ const fr: Record<TranslationKey, string> = {
   cameraNeeded: 'L’accès à la caméra est nécessaire pour scanner les étiquettes.',
   cameraDenied:
     'L’appareil photo est désactivé. Vous pouvez toujours ajouter un article depuis la photothèque ou le saisir manuellement.',
-  allowCamera: 'Autoriser la caméra',
+  continue: 'Continuer',
   chooseLibrary: 'Choisir dans la photothèque',
   readingLabel: 'Lecture de l’étiquette…',
   library: 'Photothèque',
@@ -643,7 +643,7 @@ const it: Record<TranslationKey, string> = {
   cameraNeeded: 'Serve l’accesso alla fotocamera per scansionare le etichette.',
   cameraDenied:
     'La fotocamera è disattivata. Puoi comunque aggiungere un prodotto dalla libreria o inserirlo manualmente.',
-  allowCamera: 'Consenti fotocamera',
+  continue: 'Continua',
   chooseLibrary: 'Scegli dalla libreria',
   readingLabel: 'Lettura etichetta…',
   library: 'Libreria',
@@ -736,7 +736,7 @@ const nl: Record<TranslationKey, string> = {
   cameraNeeded: 'Cameratoegang is nodig om etiketten te scannen.',
   cameraDenied:
     'De camera is uitgeschakeld. Je kunt nog steeds een item uit de bibliotheek toevoegen of het handmatig invoeren.',
-  allowCamera: 'Camera toestaan',
+  continue: 'Doorgaan',
   chooseLibrary: 'Kies uit bibliotheek',
   readingLabel: 'Etiket lezen…',
   library: 'Bibliotheek',
@@ -829,7 +829,7 @@ const fi: Record<TranslationKey, string> = {
   cameraNeeded: 'Kameran käyttöoikeus tarvitaan etikettien skannaamiseen.',
   cameraDenied:
     'Kamera on pois käytöstä. Voit silti lisätä tuotteen kuvakirjastosta tai syöttää sen käsin.',
-  allowCamera: 'Salli kamera',
+  continue: 'Jatka',
   chooseLibrary: 'Valitse kirjastosta',
   readingLabel: 'Luetaan etikettiä…',
   library: 'Kirjasto',
@@ -922,7 +922,7 @@ const sv: Record<TranslationKey, string> = {
   cameraNeeded: 'Kamerabehörighet behövs för att skanna etiketter.',
   cameraDenied:
     'Kameran är avstängd. Du kan fortfarande lägga till en vara från bildbiblioteket eller ange den manuellt.',
-  allowCamera: 'Tillåt kamera',
+  continue: 'Fortsätt',
   chooseLibrary: 'Välj från bibliotek',
   readingLabel: 'Läser etikett…',
   library: 'Bibliotek',
@@ -1015,7 +1015,7 @@ const da: Record<TranslationKey, string> = {
   cameraNeeded: 'Kameraadgang er nødvendig for at scanne etiketter.',
   cameraDenied:
     'Kameraet er slået fra. Du kan stadig tilføje en vare fra biblioteket eller indtaste den manuelt.',
-  allowCamera: 'Tillad kamera',
+  continue: 'Fortsæt',
   chooseLibrary: 'Vælg fra bibliotek',
   readingLabel: 'Læser etiket…',
   library: 'Bibliotek',
@@ -1108,7 +1108,7 @@ const hu: Record<TranslationKey, string> = {
   cameraNeeded: 'A címkék beolvasásához kameraengedély szükséges.',
   cameraDenied:
     'A kamera ki van kapcsolva. Továbbra is hozzáadhat egy tételt a fotókönyvtárból, vagy megadhatja kézzel.',
-  allowCamera: 'Kamera engedélyezése',
+  continue: 'Folytatás',
   chooseLibrary: 'Választás a könyvtárból',
   readingLabel: 'Címke olvasása…',
   library: 'Könyvtár',
@@ -1201,7 +1201,7 @@ const tr: Record<TranslationKey, string> = {
   cameraNeeded: 'Etiketleri taramak için kamera izni gerekir.',
   cameraDenied:
     'Kamera kapalı. Yine de fotoğraf kitaplığından bir öğe ekleyebilir veya elle girebilirsiniz.',
-  allowCamera: 'Kameraya izin ver',
+  continue: 'Devam',
   chooseLibrary: 'Kitaplıktan seç',
   readingLabel: 'Etiket okunuyor…',
   library: 'Kitaplık',
@@ -1292,7 +1292,7 @@ const zh: Record<TranslationKey, string> = {
   deleteSelectedConfirm: '要删除所选的 {count} 项吗？',
   cameraNeeded: '扫描食品标签需要相机权限。',
   cameraDenied: '相机已关闭。你仍可以从相册添加食品，或手动输入。',
-  allowCamera: '允许使用相机',
+  continue: '继续',
   chooseLibrary: '改为从相册选择',
   readingLabel: '正在识别标签…',
   library: '相册',
@@ -1385,7 +1385,7 @@ const ja: Record<TranslationKey, string> = {
   cameraNeeded: '食品ラベルのスキャンにはカメラへのアクセスが必要です。',
   cameraDenied:
     'カメラはオフです。フォトライブラリから追加するか、手動で入力できます。',
-  allowCamera: 'カメラを許可',
+  continue: '続ける',
   chooseLibrary: 'ライブラリから選ぶ',
   readingLabel: 'ラベルを読み取り中…',
   library: 'ライブラリ',
@@ -1478,7 +1478,7 @@ const ko: Record<TranslationKey, string> = {
   cameraNeeded: '식품 라벨을 스캔하려면 카메라 권한이 필요합니다.',
   cameraDenied:
     '카메라가 꺼져 있습니다. 사진 보관함에서 추가하거나 직접 입력할 수 있습니다.',
-  allowCamera: '카메라 허용',
+  continue: '계속',
   chooseLibrary: '앨범에서 선택',
   readingLabel: '라벨 읽는 중…',
   library: '앨범',
@@ -1571,7 +1571,7 @@ const el: Record<TranslationKey, string> = {
   cameraNeeded: 'Απαιτείται πρόσβαση στην κάμερα για σάρωση ετικετών.',
   cameraDenied:
     'Η κάμερα είναι απενεργοποιημένη. Μπορείτε ακόμα να προσθέσετε ένα προϊόν από τη βιβλιοθήκη ή να το εισαγάγετε χειροκίνητα.',
-  allowCamera: 'Να επιτρέπεται η κάμερα',
+  continue: 'Συνέχεια',
   chooseLibrary: 'Επιλογή από τη συλλογή',
   readingLabel: 'Ανάγνωση ετικέτας…',
   library: 'Συλλογή',
@@ -1664,7 +1664,7 @@ const ar: Record<TranslationKey, string> = {
   cameraNeeded: 'يلزم الوصول إلى الكاميرا لمسح ملصقات الطعام.',
   cameraDenied:
     'الكاميرا متوقفة. لا يزال بإمكانك إضافة عنصر من مكتبة الصور أو إدخاله يدويًا.',
-  allowCamera: 'السماح بالكاميرا',
+  continue: 'متابعة',
   chooseLibrary: 'اختيار من المعرض',
   readingLabel: 'جارٍ قراءة الملصق…',
   library: 'المعرض',
@@ -1757,7 +1757,7 @@ const pl: Record<TranslationKey, string> = {
   cameraNeeded: 'Do skanowania etykiet potrzebny jest dostęp do aparatu.',
   cameraDenied:
     'Aparat jest wyłączony. Nadal możesz dodać produkt z biblioteki zdjęć lub wprowadzić go ręcznie.',
-  allowCamera: 'Zezwól na aparat',
+  continue: 'Kontynuuj',
   chooseLibrary: 'Wybierz z galerii',
   readingLabel: 'Odczytywanie etykiety…',
   library: 'Galeria',
@@ -1850,7 +1850,7 @@ const ru: Record<TranslationKey, string> = {
   cameraNeeded: 'Для сканирования этикеток нужен доступ к камере.',
   cameraDenied:
     'Камера выключена. Вы по-прежнему можете добавить продукт из галереи или ввести его вручную.',
-  allowCamera: 'Разрешить камеру',
+  continue: 'Продолжить',
   chooseLibrary: 'Выбрать из галереи',
   readingLabel: 'Чтение этикетки…',
   library: 'Галерея',

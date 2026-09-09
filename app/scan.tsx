@@ -67,7 +67,7 @@ export default function ScanScreen() {
     (permission.status === 'undetermined' ||
       (Platform.OS !== 'ios' && permission.canAskAgain));
 
-  async function onAllowCamera() {
+  async function onContinueForCamera() {
     if (!canShowSystemPrompt || askingCameraRef.current) return;
     askingCameraRef.current = true;
     try {
@@ -160,35 +160,30 @@ export default function ScanScreen() {
         {canShowSystemPrompt ? (
           <Pressable
             style={[styles.btn, { backgroundColor: colors.tint }]}
-            onPress={onAllowCamera}>
-            <Text style={styles.btnText}>{t('allowCamera')}</Text>
+            onPress={onContinueForCamera}>
+            <Text style={styles.btnText}>{t('continue')}</Text>
           </Pressable>
         ) : (
-          <Pressable
-            style={[styles.btn, { backgroundColor: colors.tint }]}
-            onPress={pickFromLibrary}>
-            <Text style={styles.btnText}>{t('chooseLibrary')}</Text>
-          </Pressable>
+          <>
+            <Pressable
+              style={[styles.btn, { backgroundColor: colors.tint }]}
+              onPress={pickFromLibrary}>
+              <Text style={styles.btnText}>{t('chooseLibrary')}</Text>
+            </Pressable>
+            <Pressable
+              style={styles.linkBtn}
+              onPress={() => router.replace('/manual-add')}>
+              <Text style={{ color: colors.tint, fontWeight: '600' }}>
+                {t('addManually')}
+              </Text>
+            </Pressable>
+            <Pressable style={styles.linkBtn} onPress={() => router.back()}>
+              <Text style={{ color: colors.muted, fontWeight: '600' }}>
+                {t('cancel')}
+              </Text>
+            </Pressable>
+          </>
         )}
-        {canShowSystemPrompt ? (
-          <Pressable style={styles.linkBtn} onPress={pickFromLibrary}>
-            <Text style={{ color: colors.tint, fontWeight: '600' }}>
-              {t('chooseLibrary')}
-            </Text>
-          </Pressable>
-        ) : null}
-        <Pressable
-          style={styles.linkBtn}
-          onPress={() => router.replace('/manual-add')}>
-          <Text style={{ color: colors.tint, fontWeight: '600' }}>
-            {t('addManually')}
-          </Text>
-        </Pressable>
-        <Pressable style={styles.linkBtn} onPress={() => router.back()}>
-          <Text style={{ color: colors.muted, fontWeight: '600' }}>
-            {t('cancel')}
-          </Text>
-        </Pressable>
       </View>
     );
   }
