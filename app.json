@@ -1,22 +1,23 @@
 {
   "expo": {
-    "name": "NePerdas",
+    "name": "Notires",
     "slug": "neperdas",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "neperdas",
+    "scheme": "notires",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.neperdas.app",
       "infoPlist": {
-        "CFBundleDisplayName": "NePerdas",
-        "NSCameraUsageDescription": "NePerdas uses the camera to scan food package labels and expiry dates.",
-        "NSPhotoLibraryUsageDescription": "NePerdas needs photo library access to scan food package photos.",
-        "NSCalendarsUsageDescription": "NePerdas can add expiry reminders to your calendar.",
-        "NSCalendarsFullAccessUsageDescription": "NePerdas can add expiry reminders to your calendar.",
-        "NSRemindersUsageDescription": "NePerdas can create reminders for food expiry dates.",
+        "CFBundleDisplayName": "Notires",
+        "CFBundleName": "Notires",
+        "NSCameraUsageDescription": "Notires uses the camera to scan food package labels and expiry dates.",
+        "NSPhotoLibraryUsageDescription": "Notires needs photo library access to scan food package photos.",
+        "NSCalendarsUsageDescription": "Notires can add expiry reminders to your calendar.",
+        "NSCalendarsFullAccessUsageDescription": "Notires can add expiry reminders to your calendar.",
+        "NSRemindersUsageDescription": "Notires can create reminders for food expiry dates.",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
@@ -65,19 +66,19 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "NePerdas uses the camera to scan food package labels and expiry dates."
+          "cameraPermission": "Notires uses the camera to scan food package labels and expiry dates."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "NePerdas needs photo library access to scan food package photos."
+          "photosPermission": "Notires needs photo library access to scan food package photos."
         }
       ],
       [
         "expo-calendar",
         {
-          "calendarPermission": "NePerdas can add expiry reminders to your calendar."
+          "calendarPermission": "Notires can add expiry reminders to your calendar."
         }
       ],
       [
@@ -101,7 +102,8 @@
           }
         }
       ],
-      "@react-native-community/datetimepicker"
+      "@react-native-community/datetimepicker",
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true

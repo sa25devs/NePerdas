@@ -1,23 +1,23 @@
 # Privacy Policy (Datenschutz)
 
-**App:** NePerdas  
+**App:** Notires  
 **Effective date:** 25 August 2026
 
-This Privacy Policy explains how NePerdas (“the App”) handles information when you use it on your device.
+This Privacy Policy explains how Notires (“the App”) handles information when you use it on your device.
 
 ## 1. Introduction
 
-NePerdas helps you track food expiry dates by scanning package labels and storing items on your device. This notice describes what data is processed, how it is used, and what choices you have.
+Notires helps you track food expiry dates by scanning package labels and storing items on your device. This notice describes what data is processed, how it is used, and what choices you have.
 
 ## 2. Who we are
 
 The App is provided by **sa25** (© 2026 sa25).
 
-For privacy questions, contact us through the App Store or Google Play listing for NePerdas.
+For privacy questions, contact us through the App Store or Google Play listing for Notires.
 
 ## 3. Data we process
 
-The App is designed to work **on your device**. In the current version, your food data is **not uploaded** to our servers (we do not operate a cloud backend for NePerdas inventory data).
+The App is designed to work **on your device**. In the current version, your food data is **not uploaded** to our servers (we do not operate a cloud backend for Notires inventory data).
 
 Depending on how you use the App, the following may be stored **locally** on your device:
 
@@ -89,7 +89,7 @@ We may update this Privacy Policy from time to time. The “Effective date” at
 
 ## 11. Contact
 
-Questions about this Privacy Policy or NePerdas privacy practices:
+Questions about this Privacy Policy or Notires privacy practices:
 
-- Use the support / contact options on the **NePerdas** App Store or Google Play listing
+- Use the support / contact options on the **Notires** App Store or Google Play listing
 - Rights holder: **sa25** (© 2026 sa25)

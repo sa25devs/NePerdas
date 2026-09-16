@@ -85,7 +85,7 @@ export async function scheduleReminder(
 
   const id = await Notifications.scheduleNotificationAsync({
     content: {
-      title: 'NePerdas',
+      title: 'Notires',
       body: translate(language, 'notificationBody', {
         name: item.name,
         date: formatDate(item.expirationDate, language),

@@ -146,7 +146,7 @@ const en = {
 
   notificationChannel: 'Food expiry',
   notificationBody: '{name} expires on {date}',
-  calendarEventTitle: 'NePerdas: {name} expiring',
+  calendarEventTitle: 'Notires: {name} expiring',
   calendarEventNotes: '{name} expires on {date}.',
   untitledFood: 'Untitled food',
 } as const;
@@ -239,7 +239,7 @@ const es: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Caducidad de alimentos',
   notificationBody: '{name} caduca el {date}',
-  calendarEventTitle: 'NePerdas: {name} caduca pronto',
+  calendarEventTitle: 'Notires: {name} caduca pronto',
   calendarEventNotes: '{name} caduca el {date}.',
   untitledFood: 'Alimento sin nombre',
 };
@@ -332,7 +332,7 @@ const ca: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Caducitat d’aliments',
   notificationBody: '{name} caduca el {date}',
-  calendarEventTitle: 'NePerdas: {name} caduca aviat',
+  calendarEventTitle: 'Notires: {name} caduca aviat',
   calendarEventNotes: '{name} caduca el {date}.',
   untitledFood: 'Aliment sense nom',
 };
@@ -425,7 +425,7 @@ const pt: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Validade dos alimentos',
   notificationBody: '{name} expira a {date}',
-  calendarEventTitle: 'NePerdas: {name} a expirar',
+  calendarEventTitle: 'Notires: {name} a expirar',
   calendarEventNotes: '{name} expira a {date}.',
   untitledFood: 'Alimento sem nome',
 };
@@ -518,7 +518,7 @@ const de: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Lebensmittel-Ablauf',
   notificationBody: '{name} läuft am {date} ab',
-  calendarEventTitle: 'NePerdas: {name} läuft ab',
+  calendarEventTitle: 'Notires: {name} läuft ab',
   calendarEventNotes: '{name} läuft am {date} ab.',
   untitledFood: 'Unbenanntes Lebensmittel',
 };
@@ -611,7 +611,7 @@ const fr: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Péremption des aliments',
   notificationBody: '{name} expire le {date}',
-  calendarEventTitle: 'NePerdas : {name} expire bientôt',
+  calendarEventTitle: 'Notires : {name} expire bientôt',
   calendarEventNotes: '{name} expire le {date}.',
   untitledFood: 'Aliment sans nom',
 };
@@ -704,7 +704,7 @@ const it: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Scadenza alimenti',
   notificationBody: '{name} scade il {date}',
-  calendarEventTitle: 'NePerdas: {name} in scadenza',
+  calendarEventTitle: 'Notires: {name} in scadenza',
   calendarEventNotes: '{name} scade il {date}.',
   untitledFood: 'Alimento senza nome',
 };
@@ -797,7 +797,7 @@ const nl: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Voedselverval',
   notificationBody: '{name} verloopt op {date}',
-  calendarEventTitle: 'NePerdas: {name} verloopt',
+  calendarEventTitle: 'Notires: {name} verloopt',
   calendarEventNotes: '{name} verloopt op {date}.',
   untitledFood: 'Naamloos voedsel',
 };
@@ -890,7 +890,7 @@ const fi: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Ruuan vanheneminen',
   notificationBody: '{name} vanhenee {date}',
-  calendarEventTitle: 'NePerdas: {name} vanhenee',
+  calendarEventTitle: 'Notires: {name} vanhenee',
   calendarEventNotes: '{name} vanhenee {date}.',
   untitledFood: 'Nimetön ruoka',
 };
@@ -983,7 +983,7 @@ const sv: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Matutgång',
   notificationBody: '{name} går ut {date}',
-  calendarEventTitle: 'NePerdas: {name} går snart ut',
+  calendarEventTitle: 'Notires: {name} går snart ut',
   calendarEventNotes: '{name} går ut {date}.',
   untitledFood: 'Namnlös mat',
 };
@@ -1076,7 +1076,7 @@ const da: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Madudløb',
   notificationBody: '{name} udløber {date}',
-  calendarEventTitle: 'NePerdas: {name} udløber snart',
+  calendarEventTitle: 'Notires: {name} udløber snart',
   calendarEventNotes: '{name} udløber {date}.',
   untitledFood: 'Unavngivet mad',
 };
@@ -1169,7 +1169,7 @@ const hu: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Élelmiszer-lejárat',
   notificationBody: '{name} lejár: {date}',
-  calendarEventTitle: 'NePerdas: {name} hamarosan lejár',
+  calendarEventTitle: 'Notires: {name} hamarosan lejár',
   calendarEventNotes: '{name} lejár: {date}.',
   untitledFood: 'Névtelen élelmiszer',
 };
@@ -1262,7 +1262,7 @@ const tr: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Gıda son kullanma',
   notificationBody: '{name} son kullanma tarihi: {date}',
-  calendarEventTitle: 'NePerdas: {name} yakında sona eriyor',
+  calendarEventTitle: 'Notires: {name} yakında sona eriyor',
   calendarEventNotes: '{name} son kullanma tarihi: {date}.',
   untitledFood: 'Adsız gıda',
 };
@@ -1353,7 +1353,7 @@ const zh: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: '食品到期',
   notificationBody: '{name} 将于 {date} 到期',
-  calendarEventTitle: 'NePerdas：{name} 即将到期',
+  calendarEventTitle: 'Notires：{name} 即将到期',
   calendarEventNotes: '{name} 将于 {date} 到期。',
   untitledFood: '未命名食品',
 };
@@ -1446,7 +1446,7 @@ const ja: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: '食品の期限',
   notificationBody: '{name}の期限は{date}です',
-  calendarEventTitle: 'NePerdas：{name}の期限が近づいています',
+  calendarEventTitle: 'Notires：{name}の期限が近づいています',
   calendarEventNotes: '{name}の期限は{date}です。',
   untitledFood: '名称未設定の食品',
 };
@@ -1539,7 +1539,7 @@ const ko: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: '식품 유통기한',
   notificationBody: '{name} 유통기한: {date}',
-  calendarEventTitle: 'NePerdas: {name} 곧 만료',
+  calendarEventTitle: 'Notires: {name} 곧 만료',
   calendarEventNotes: '{name} 유통기한: {date}.',
   untitledFood: '이름 없는 식품',
 };
@@ -1632,7 +1632,7 @@ const el: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Λήξη τροφίμων',
   notificationBody: 'Το {name} λήγει στις {date}',
-  calendarEventTitle: 'NePerdas: λήγει το {name}',
+  calendarEventTitle: 'Notires: λήγει το {name}',
   calendarEventNotes: 'Το {name} λήγει στις {date}.',
   untitledFood: 'Τρόφιμο χωρίς όνομα',
 };
@@ -1725,7 +1725,7 @@ const ar: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'انتهاء صلاحية الطعام',
   notificationBody: '{name} ينتهي في {date}',
-  calendarEventTitle: 'NePerdas: {name} على وشك الانتهاء',
+  calendarEventTitle: 'Notires: {name} على وشك الانتهاء',
   calendarEventNotes: '{name} ينتهي في {date}.',
   untitledFood: 'طعام بدون اسم',
 };
@@ -1818,7 +1818,7 @@ const pl: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Ważność żywności',
   notificationBody: '{name} traci ważność {date}',
-  calendarEventTitle: 'NePerdas: {name} wkrótce traci ważność',
+  calendarEventTitle: 'Notires: {name} wkrótce traci ważność',
   calendarEventNotes: '{name} traci ważność {date}.',
   untitledFood: 'Żywność bez nazwy',
 };
@@ -1911,7 +1911,7 @@ const ru: Record<TranslationKey, string> = {
   aboutCredit: 'SA25',
   notificationChannel: 'Срок годности продуктов',
   notificationBody: '{name} годен до {date}',
-  calendarEventTitle: 'NePerdas: {name} скоро истекает',
+  calendarEventTitle: 'Notires: {name} скоро истекает',
   calendarEventNotes: '{name} годен до {date}.',
   untitledFood: 'Продукт без названия',
 };

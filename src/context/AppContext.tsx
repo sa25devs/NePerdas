@@ -9,8 +9,7 @@ import React, {
 
 import type { AppSettings, FoodItem } from '@/src/models/types';
 import { listFoodItems } from '@/src/services/foodService';
-import { loadSettings, saveSettings } from '@/src/storage/settings';
-import { DEFAULT_SETTINGS } from '@/src/models/types';
+import { defaultSettings, loadSettings, saveSettings } from '@/src/storage/settings';
 import { syncLayoutDirection } from '@/src/i18n/rtl';
 
 type AppContextValue = {
@@ -25,7 +24,7 @@ const AppContext = createContext<AppContextValue | null>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<FoodItem[]>([]);
-  const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useState<AppSettings>(() => defaultSettings());
   const [loading, setLoading] = useState(true);
 
   const refreshItems = useCallback(async () => {

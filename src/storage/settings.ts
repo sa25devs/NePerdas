@@ -5,6 +5,7 @@ import {
   type AppSettings,
   type DaysBeforeExpiryByFoodType,
 } from '@/src/models/types';
+import { languageFromDevice } from '@/src/i18n/deviceLanguage';
 import {
   VALID_LANGUAGES,
   type AppLanguage,
@@ -30,16 +31,21 @@ function normalizeDaysByFoodType(
   return next;
 }
 
+export function defaultSettings(): AppSettings {
+  return { ...DEFAULT_SETTINGS, language: languageFromDevice() };
+}
+
 export async function loadSettings(): Promise<AppSettings> {
+  const fallback = defaultSettings();
   try {
     const raw = await AsyncStorage.getItem(SETTINGS_KEY);
-    if (!raw) return { ...DEFAULT_SETTINGS };
+    if (!raw) return fallback;
     const parsed = JSON.parse(raw) as Partial<AppSettings>;
     const language = VALID_LANGUAGES.has(parsed.language as AppLanguage)
       ? (parsed.language as AppLanguage)
-      : DEFAULT_SETTINGS.language;
+      : fallback.language;
     return {
-      ...DEFAULT_SETTINGS,
+      ...fallback,
       ...parsed,
       daysBeforeExpiryByFoodType: normalizeDaysByFoodType(
         parsed.daysBeforeExpiryByFoodType,
@@ -47,7 +53,7 @@ export async function loadSettings(): Promise<AppSettings> {
       language,
     };
   } catch {
-    return { ...DEFAULT_SETTINGS };
+    return fallback;
   }
 }
 

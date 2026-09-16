@@ -39,13 +39,13 @@ async function getWritableCalendarId(): Promise<string | null> {
     if (!local) return null;
 
     return await Calendar.createCalendarAsync({
-      title: 'NePerdas',
+      title: 'Notires',
       color: '#2E7D32',
       entityType: Calendar.EntityTypes.EVENT,
       sourceId: local.id,
       source: local,
-      name: 'neperdas',
-      ownerAccount: 'NePerdas',
+      name: 'notires',
+      ownerAccount: 'Notires',
       accessLevel: Calendar.CalendarAccessLevel.OWNER,
     });
   } catch {
