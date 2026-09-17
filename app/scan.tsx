@@ -1,5 +1,4 @@
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import * as ImageManipulator from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation, useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
@@ -16,16 +15,8 @@ import {
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { getLabelExtractor } from '@/src/extraction/getLabelExtractor';
+import { preparePreviewImage } from '@/src/extraction/prepareOcrImage';
 import { useI18n } from '@/src/i18n/useI18n';
-
-async function compressImage(uri: string): Promise<string> {
-  const result = await ImageManipulator.manipulateAsync(
-    uri,
-    [{ resize: { width: 1280 } }],
-    { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG },
-  );
-  return result.uri;
-}
 
 export default function ScanScreen() {
   const colorScheme = useColorScheme() ?? 'light';
@@ -37,6 +28,7 @@ export default function ScanScreen() {
   const askingCameraRef = useRef(false);
   const [permission, requestPermission, getPermission] = useCameraPermissions();
   const [busy, setBusy] = useState(false);
+  const [torchOn, setTorchOn] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // After Don't Allow, never re-request camera or send the user to Settings.
   const [deniedThisSession, setDeniedThisSession] = useState(false);
@@ -84,12 +76,12 @@ export default function ScanScreen() {
     setBusy(true);
     setError(null);
     try {
-      const compressed = await compressImage(uri);
+      const previewUri = await preparePreviewImage(uri);
       let name: string | null = null;
       let expirationDate: string | null = null;
       let rawText = '';
       try {
-        const extracted = await getLabelExtractor().extract(compressed);
+        const extracted = await getLabelExtractor().extract(uri);
         name = extracted.name;
         expirationDate = extracted.expirationDate;
         rawText = extracted.rawText;
@@ -100,7 +92,7 @@ export default function ScanScreen() {
       router.push({
         pathname: '/review',
         params: {
-          photoUri: compressed,
+          photoUri: previewUri,
           name: name ?? '',
           expirationDate: expirationDate ?? '',
           rawText,
@@ -119,7 +111,7 @@ export default function ScanScreen() {
     if (!cameraRef.current || busy) return;
     try {
       const photo = await cameraRef.current.takePictureAsync({
-        quality: 0.8,
+        quality: 1,
         skipProcessing: false,
       });
       if (photo?.uri) {
@@ -136,7 +128,7 @@ export default function ScanScreen() {
     if (busy) return;
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
-      quality: 0.8,
+      quality: 1,
     });
     if (!result.canceled && result.assets[0]?.uri) {
       await processImage(result.assets[0].uri);
@@ -190,7 +182,19 @@ export default function ScanScreen() {
 
   return (
     <View style={styles.container}>
-      <CameraView ref={cameraRef} style={styles.camera} facing="back" />
+      <CameraView
+        ref={cameraRef}
+        style={styles.camera}
+        facing="back"
+        enableTorch={torchOn}
+        flash={torchOn ? 'on' : 'off'}
+      />
+      {!busy ? (
+        <View pointerEvents="none" style={styles.guideWrap}>
+          <View style={styles.guideBox} />
+          <Text style={styles.guideText}>{t('scanGuide')}</Text>
+        </View>
+      ) : null}
       {busy ? (
         <View style={styles.overlay}>
           <ActivityIndicator size="large" color="#fff" />
@@ -199,6 +203,15 @@ export default function ScanScreen() {
       ) : null}
       <View style={styles.controls}>
         {error ? <Text style={styles.error}>{error}</Text> : null}
+        <Pressable
+          style={[styles.torchBtn, torchOn && styles.torchBtnOn]}
+          onPress={() => setTorchOn((on) => !on)}
+          disabled={busy}
+          accessibilityLabel={t('torch')}>
+          <Text style={styles.torchText}>
+            {torchOn ? t('torchOn') : t('torch')}
+          </Text>
+        </Pressable>
         <Pressable
           style={[styles.shutter, busy && { opacity: 0.5 }]}
           onPress={takePhoto}
@@ -254,6 +267,37 @@ const styles = StyleSheet.create({
   },
   btnText: { color: '#fff', fontWeight: '700' },
   linkBtn: { paddingVertical: 8 },
+  guideWrap: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: '22%',
+    bottom: '28%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 28,
+    gap: 10,
+  },
+  guideBox: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    marginHorizontal: 28,
+    borderWidth: 2,
+    borderColor: 'rgba(255,255,255,0.85)',
+    borderRadius: 12,
+  },
+  guideText: {
+    color: '#fff',
+    fontWeight: '700',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0,0,0,0.8)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
+    marginBottom: 8,
+  },
   overlay: {
     position: 'absolute',
     top: 0,
@@ -272,8 +316,25 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 40,
     paddingHorizontal: 16,
-    gap: 16,
+    gap: 12,
     alignItems: 'center',
+  },
+  torchBtn: {
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#fff',
+    backgroundColor: 'rgba(0,0,0,0.35)',
+  },
+  torchBtnOn: {
+    backgroundColor: '#2E7D32',
+    borderColor: '#2E7D32',
+  },
+  torchText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 13,
   },
   row: {
     flexDirection: 'row',
