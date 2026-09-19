@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.notires.app",
+      "bundleIdentifier": "com.neperdas.app",
       "infoPlist": {
         "CFBundleDisplayName": "Notires",
         "CFBundleName": "Notires",
@@ -22,7 +22,7 @@
       }
     },
     "android": {
-      "package": "com.notires.app",
+      "package": "com.neperdas.app",
       "adaptiveIcon": {
         "backgroundColor": "#2E7D32",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
