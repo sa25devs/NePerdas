@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   AppState,
+  Linking,
   Platform,
   Pressable,
   StyleSheet,
@@ -29,8 +30,9 @@ export default function ScanScreen() {
   const [permission, requestPermission, getPermission] = useCameraPermissions();
   const [busy, setBusy] = useState(false);
   const [torchOn, setTorchOn] = useState(false);
+  const [askingCamera, setAskingCamera] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // After Don't Allow, never re-request camera or send the user to Settings.
+  // After Don't Allow, skip auto re-prompt and offer other add options.
   const [deniedThisSession, setDeniedThisSession] = useState(false);
 
   useEffect(() => {
@@ -59,17 +61,52 @@ export default function ScanScreen() {
     (permission.status === 'undetermined' ||
       (Platform.OS !== 'ios' && permission.canAskAgain));
 
-  async function onContinueForCamera() {
-    if (!canShowSystemPrompt || askingCameraRef.current) return;
+  async function requestCameraAccess() {
+    if (askingCameraRef.current) return;
     askingCameraRef.current = true;
+    setAskingCamera(true);
     try {
       const result = await requestPermission();
-      if (!result.granted) {
+      if (result.granted) {
+        setDeniedThisSession(false);
+      } else {
         setDeniedThisSession(true);
       }
+      return result;
     } finally {
       askingCameraRef.current = false;
+      setAskingCamera(false);
     }
+  }
+
+  useEffect(() => {
+    if (
+      permission == null ||
+      permission.granted ||
+      permission.status !== 'undetermined'
+    ) {
+      return;
+    }
+    void requestCameraAccess();
+  }, [permission]);
+
+  async function onContinueForCamera() {
+    if (!canShowSystemPrompt) return;
+    await requestCameraAccess();
+  }
+
+  async function onUseCamera() {
+    const latest = permission ?? (await getPermission());
+    const canAsk =
+      latest == null ||
+      latest.granted ||
+      latest.status === 'undetermined' ||
+      latest.canAskAgain;
+    if (canAsk) {
+      await requestCameraAccess();
+      return;
+    }
+    await Linking.openSettings();
   }
 
   async function processImage(uri: string) {
@@ -135,7 +172,11 @@ export default function ScanScreen() {
     }
   }
 
-  if (!permission) {
+  if (
+    !permission ||
+    askingCamera ||
+    permission.status === 'undetermined'
+  ) {
     return (
       <View style={[styles.center, { backgroundColor: colors.background }]}>
         <ActivityIndicator color={colors.tint} />
@@ -157,6 +198,11 @@ export default function ScanScreen() {
           </Pressable>
         ) : (
           <>
+            <Pressable
+              style={[styles.btn, { backgroundColor: colors.tint }]}
+              onPress={() => void onUseCamera()}>
+              <Text style={styles.btnText}>{t('useCamera')}</Text>
+            </Pressable>
             <Pressable
               style={[styles.btn, { backgroundColor: colors.tint }]}
               onPress={pickFromLibrary}>

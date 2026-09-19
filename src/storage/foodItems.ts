@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { FoodItem } from '@/src/models/types';
 import { migratePhotoRef } from '@/src/storage/photos';
 
-const ITEMS_KEY = 'neperdas:foodItems';
+const ITEMS_KEY = 'notires:foodItems';
 
 export async function loadFoodItems(): Promise<FoodItem[]> {
   try {

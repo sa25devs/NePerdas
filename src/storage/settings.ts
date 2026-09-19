@@ -1,18 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {
-  DEFAULT_SETTINGS,
-  type AppSettings,
-  type DaysBeforeExpiryByFoodType,
-} from '@/src/models/types';
 import { languageFromDevice } from '@/src/i18n/deviceLanguage';
 import {
-  VALID_LANGUAGES,
-  type AppLanguage,
+    VALID_LANGUAGES,
+    type AppLanguage,
 } from '@/src/i18n/translations';
+import {
+    DEFAULT_SETTINGS,
+    type AppSettings,
+    type DaysBeforeExpiryByFoodType,
+} from '@/src/models/types';
 import { FOOD_TYPES } from '@/src/utils/foodType';
 
-const SETTINGS_KEY = 'neperdas:settings';
+const SETTINGS_KEY = 'notires:settings';
 
 function clampDays(value: unknown, fallback: number): number {
   const n = Number(value);

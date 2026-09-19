@@ -73,7 +73,7 @@ function RootLayoutNav() {
         <Stack.Screen name="item/[id]" options={{ title: 'Item' }} />
         <Stack.Screen
           name="scan"
-          options={{ title: 'Scan', presentation: 'modal' }}
+          options={{ title: 'Scan', presentation: 'fullScreenModal' }}
         />
         <Stack.Screen
           name="manual-add"

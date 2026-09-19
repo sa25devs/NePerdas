@@ -14,7 +14,7 @@
     "production": {
       "autoIncrement": true,
       "cache": {
-        "key": "neperdas-v2"
+        "key": "notires-v2"
       }
     }
   },

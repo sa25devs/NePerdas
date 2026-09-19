@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Notires",
-    "slug": "neperdas",
+    "slug": "notires",
     "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.neperdas.app",
+      "bundleIdentifier": "com.notires.app",
       "infoPlist": {
         "CFBundleDisplayName": "Notires",
         "CFBundleName": "Notires",
@@ -22,7 +22,7 @@
       }
     },
     "android": {
-      "package": "com.neperdas.app",
+      "package": "com.notires.app",
       "adaptiveIcon": {
         "backgroundColor": "#2E7D32",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

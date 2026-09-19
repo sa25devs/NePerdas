@@ -83,6 +83,7 @@ const en = {
   cameraDenied:
     'Camera is turned off. You can still add an item from your photo library or enter it manually.',
   continue: 'Continue',
+  useCamera: 'Use camera',
   chooseLibrary: 'Choose from library instead',
   readingLabel: 'Reading label…',
   scanGuide: 'Frame the name and expiry date',
@@ -182,6 +183,7 @@ const es: Record<TranslationKey, string> = {
   cameraDenied:
     'La cámara está desactivada. Aún puedes añadir un producto desde la galería o escribirlo a mano.',
   continue: 'Continuar',
+  useCamera: 'Usar cámara',
   chooseLibrary: 'Elegir de la galería',
   readingLabel: 'Leyendo etiqueta…',
   scanGuide: 'Encuadra el nombre y la fecha de caducidad',
@@ -278,6 +280,7 @@ const ca: Record<TranslationKey, string> = {
   cameraDenied:
     'La càmera està desactivada. Encara pots afegir un producte des de la galeria o escriure’l a mà.',
   continue: 'Continua',
+  useCamera: 'Usa la càmera',
   chooseLibrary: 'Triar de la galeria',
   readingLabel: 'Llegint l’etiqueta…',
   scanGuide: 'Enquadra el nom i la data de caducitat',
@@ -374,6 +377,7 @@ const pt: Record<TranslationKey, string> = {
   cameraDenied:
     'A câmara está desativada. Ainda podes adicionar um item a partir da galeria ou introduzi-lo manualmente.',
   continue: 'Continuar',
+  useCamera: 'Usar câmara',
   chooseLibrary: 'Escolher da galeria',
   readingLabel: 'A ler etiqueta…',
   scanGuide: 'Enquadre o nome e a data de validade',
@@ -470,6 +474,7 @@ const de: Record<TranslationKey, string> = {
   cameraDenied:
     'Die Kamera ist ausgeschaltet. Du kannst weiterhin ein Produkt aus der Mediathek hinzufügen oder es manuell eingeben.',
   continue: 'Weiter',
+  useCamera: 'Kamera verwenden',
   chooseLibrary: 'Aus Mediathek wählen',
   readingLabel: 'Etikett wird gelesen…',
   scanGuide: 'Name und MHD in den Rahmen',
@@ -566,6 +571,7 @@ const fr: Record<TranslationKey, string> = {
   cameraDenied:
     'L’appareil photo est désactivé. Vous pouvez toujours ajouter un article depuis la photothèque ou le saisir manuellement.',
   continue: 'Continuer',
+  useCamera: 'Utiliser l’appareil photo',
   chooseLibrary: 'Choisir dans la photothèque',
   readingLabel: 'Lecture de l’étiquette…',
   scanGuide: 'Cadrez le nom et la date d’expiration',
@@ -662,6 +668,7 @@ const it: Record<TranslationKey, string> = {
   cameraDenied:
     'La fotocamera è disattivata. Puoi comunque aggiungere un prodotto dalla libreria o inserirlo manualmente.',
   continue: 'Continua',
+  useCamera: 'Usa fotocamera',
   chooseLibrary: 'Scegli dalla libreria',
   readingLabel: 'Lettura etichetta…',
   scanGuide: 'Inquadra nome e data di scadenza',
@@ -758,6 +765,7 @@ const nl: Record<TranslationKey, string> = {
   cameraDenied:
     'De camera is uitgeschakeld. Je kunt nog steeds een item uit de bibliotheek toevoegen of het handmatig invoeren.',
   continue: 'Doorgaan',
+  useCamera: 'Camera gebruiken',
   chooseLibrary: 'Kies uit bibliotheek',
   readingLabel: 'Etiket lezen…',
   scanGuide: 'Kader de naam en houdbaarheidsdatum',
@@ -854,6 +862,7 @@ const fi: Record<TranslationKey, string> = {
   cameraDenied:
     'Kamera on pois käytöstä. Voit silti lisätä tuotteen kuvakirjastosta tai syöttää sen käsin.',
   continue: 'Jatka',
+  useCamera: 'Käytä kameraa',
   chooseLibrary: 'Valitse kirjastosta',
   readingLabel: 'Luetaan etikettiä…',
   scanGuide: 'Rajaa nimi ja viimeinen käyttöpäivä',
@@ -950,6 +959,7 @@ const sv: Record<TranslationKey, string> = {
   cameraDenied:
     'Kameran är avstängd. Du kan fortfarande lägga till en vara från bildbiblioteket eller ange den manuellt.',
   continue: 'Fortsätt',
+  useCamera: 'Använd kameran',
   chooseLibrary: 'Välj från bibliotek',
   readingLabel: 'Läser etikett…',
   scanGuide: 'Rama in namn och bäst-före-datum',
@@ -1046,6 +1056,7 @@ const da: Record<TranslationKey, string> = {
   cameraDenied:
     'Kameraet er slået fra. Du kan stadig tilføje en vare fra biblioteket eller indtaste den manuelt.',
   continue: 'Fortsæt',
+  useCamera: 'Brug kamera',
   chooseLibrary: 'Vælg fra bibliotek',
   readingLabel: 'Læser etiket…',
   scanGuide: 'Ram navn og holdbarhedsdato',
@@ -1142,6 +1153,7 @@ const hu: Record<TranslationKey, string> = {
   cameraDenied:
     'A kamera ki van kapcsolva. Továbbra is hozzáadhat egy tételt a fotókönyvtárból, vagy megadhatja kézzel.',
   continue: 'Folytatás',
+  useCamera: 'Kamera használata',
   chooseLibrary: 'Választás a könyvtárból',
   readingLabel: 'Címke olvasása…',
   scanGuide: 'Keretezd a nevet és a lejárati dátumot',
@@ -1238,6 +1250,7 @@ const tr: Record<TranslationKey, string> = {
   cameraDenied:
     'Kamera kapalı. Yine de fotoğraf kitaplığından bir öğe ekleyebilir veya elle girebilirsiniz.',
   continue: 'Devam',
+  useCamera: 'Kamerayı kullan',
   chooseLibrary: 'Kitaplıktan seç',
   readingLabel: 'Etiket okunuyor…',
   scanGuide: 'Adı ve son kullanma tarihini kadraja alın',
@@ -1332,6 +1345,7 @@ const zh: Record<TranslationKey, string> = {
   cameraNeeded: '扫描食品标签需要相机权限。',
   cameraDenied: '相机已关闭。你仍可以从相册添加食品，或手动输入。',
   continue: '继续',
+  useCamera: '使用相机',
   chooseLibrary: '改为从相册选择',
   readingLabel: '正在识别标签…',
   scanGuide: '将名称和保质期对准取景框',
@@ -1428,6 +1442,7 @@ const ja: Record<TranslationKey, string> = {
   cameraDenied:
     'カメラはオフです。フォトライブラリから追加するか、手動で入力できます。',
   continue: '続ける',
+  useCamera: 'カメラを使う',
   chooseLibrary: 'ライブラリから選ぶ',
   readingLabel: 'ラベルを読み取り中…',
   scanGuide: '名前と賞味期限を枠に入れてください',
@@ -1524,6 +1539,7 @@ const ko: Record<TranslationKey, string> = {
   cameraDenied:
     '카메라가 꺼져 있습니다. 사진 보관함에서 추가하거나 직접 입력할 수 있습니다.',
   continue: '계속',
+  useCamera: '카메라 사용',
   chooseLibrary: '앨범에서 선택',
   readingLabel: '라벨 읽는 중…',
   scanGuide: '이름과 유통기한을 프레임에 맞추세요',
@@ -1620,6 +1636,7 @@ const el: Record<TranslationKey, string> = {
   cameraDenied:
     'Η κάμερα είναι απενεργοποιημένη. Μπορείτε ακόμα να προσθέσετε ένα προϊόν από τη βιβλιοθήκη ή να το εισαγάγετε χειροκίνητα.',
   continue: 'Συνέχεια',
+  useCamera: 'Χρήση κάμερας',
   chooseLibrary: 'Επιλογή από τη συλλογή',
   readingLabel: 'Ανάγνωση ετικέτας…',
   scanGuide: 'Πλαισιώστε το όνομα και την ημερομηνία λήξης',
@@ -1716,6 +1733,7 @@ const ar: Record<TranslationKey, string> = {
   cameraDenied:
     'الكاميرا متوقفة. لا يزال بإمكانك إضافة عنصر من مكتبة الصور أو إدخاله يدويًا.',
   continue: 'متابعة',
+  useCamera: 'استخدام الكاميرا',
   chooseLibrary: 'اختيار من المعرض',
   readingLabel: 'جارٍ قراءة الملصق…',
   scanGuide: 'ضع الاسم وتاريخ الانتهاء داخل الإطار',
@@ -1812,6 +1830,7 @@ const pl: Record<TranslationKey, string> = {
   cameraDenied:
     'Aparat jest wyłączony. Nadal możesz dodać produkt z biblioteki zdjęć lub wprowadzić go ręcznie.',
   continue: 'Kontynuuj',
+  useCamera: 'Użyj aparatu',
   chooseLibrary: 'Wybierz z galerii',
   readingLabel: 'Odczytywanie etykiety…',
   scanGuide: 'Umieść nazwę i datę ważności w ramce',
@@ -1908,6 +1927,7 @@ const ru: Record<TranslationKey, string> = {
   cameraDenied:
     'Камера выключена. Вы по-прежнему можете добавить продукт из галереи или ввести его вручную.',
   continue: 'Продолжить',
+  useCamera: 'Использовать камеру',
   chooseLibrary: 'Выбрать из галереи',
   readingLabel: 'Чтение этикетки…',
   scanGuide: 'Поместите название и срок годности в рамку',
